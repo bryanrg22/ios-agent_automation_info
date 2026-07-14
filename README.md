@@ -57,6 +57,10 @@ The composed optimizations behind it — prompt caching, rolling summaries, dire
 
 <img src="docs/architecture-diagram.png" alt="Architecture — iPhone (Action Button, XCTest Runner, Companion App, Dynamic Island) and MacBook (server, agent, Maestro bridge)" width="900"/>
 
+That's the Mac-hosted path. The same agent also runs **entirely on the phone** — the loop, in Swift, driving the on-device runner directly. The Mac only launches and holds the XCTest runner; after that, the *only* thing that leaves the device is the LLM call:
+
+<img src="docs/architecture-diagram-ondevice.svg" alt="On-device mode — the entire agent loop runs on the iPhone; the Mac only launches and holds the XCTest runner over USB (then unplug, session held over Wi-Fi), and only the LLM API call leaves the device" width="900"/>
+
 The per-step loop — screenshot + UI hierarchy in, one tool call out, auto-captured result back:
 
 <img src="docs/tool-calling-loop.png" alt="Tool-calling loop" width="900"/>

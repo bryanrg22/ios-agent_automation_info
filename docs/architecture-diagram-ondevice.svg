@@ -1,0 +1,85 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='1400' height='770' viewBox='0 0 1400 770' font-family="'DM Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif">
+<defs>
+<marker id='ma' markerWidth='10' markerHeight='8' refX='8' refY='3.5' orient='auto'><path d='M0,0 L8,3.5 L0,7' fill='#E8A838'/></marker>
+<marker id='mg' markerWidth='10' markerHeight='8' refX='8' refY='3.5' orient='auto'><path d='M0,0 L8,3.5 L0,7' fill='#b0aaa0'/></marker>
+</defs>
+<rect x='8' y='8' width='1384' height='754' rx='26' fill='#242220'/>
+
+<text x='40' y='52' font-size='27' font-weight='bold' fill='#c9c3b8'>On-device mode — the whole agent loop runs on the iPhone</text>
+<text x='40' y='82' font-size='16' fill='#8a847a'>The Mac only launches and holds the runner. After startup it is out of the loop — the only thing that leaves the phone is the LLM call.</text>
+
+<!-- iPhone container -->
+<rect x='32' y='108' width='690' height='530' rx='20' fill='#2e2b28' stroke='#4a463f' stroke-width='2'/>
+<text x='56' y='146' font-size='24' font-weight='bold' fill='#c9c3b8'>iPhone 15 Pro</text>
+<text x='56' y='170' font-size='15' fill='#8a847a'>runs the entire agent loop on-device</text>
+
+<!-- Action Button (amber) -->
+<rect x='56' y='192' width='300' height='82' rx='14' fill='#B8842C'/>
+<text x='74' y='226' font-size='20' font-weight='bold' fill='#ffffff'>Action Button + Shortcut</text>
+<text x='74' y='252' font-size='15' fill='#e6e0d6'>voice trigger &#8594; run(task)</text>
+
+<!-- OnDeviceAgent (green, the star) -->
+<rect x='56' y='312' width='642' height='152' rx='14' fill='#0E9F7A'/>
+<text x='74' y='348' font-size='23' font-weight='bold' fill='#ffffff'>OnDeviceAgent &#183; Swift</text>
+<text x='74' y='380' font-size='16' fill='#e6e0d6'>the full loop runs here, on the phone:</text>
+<text x='74' y='408' font-size='16' fill='#e6e0d6'>reads task &#183; calls the LLM &#183; picks a tool &#183; sends the action</text>
+<text x='74' y='436' font-size='16' fill='#e6e0d6'>screenshots &#183; accessibility hierarchy &#183; memory &#183; HITL — all local</text>
+
+<!-- Companion (amber) -->
+<rect x='56' y='500' width='300' height='116' rx='14' fill='#B8842C'/>
+<text x='74' y='534' font-size='18' font-weight='bold' fill='#ffffff'>Companion + Dynamic Island</text>
+<text x='74' y='562' font-size='15' fill='#e6e0d6'>live progress on screen</text>
+<text x='74' y='588' font-size='15' fill='#e6e0d6'>HITL — askUser prompts</text>
+
+<!-- XCTest Runner (purple) -->
+<rect x='398' y='500' width='300' height='116' rx='14' fill='#6D5BD8'/>
+<text x='416' y='534' font-size='21' font-weight='bold' fill='#ffffff'>XCTest Runner</text>
+<text x='416' y='562' font-size='16' fill='#e6e0d6'>localhost:22087</text>
+<text x='416' y='588' font-size='15' fill='#e6e0d6'>on the device itself</text>
+
+<!-- internal arrows -->
+<path d='M206,274 L206,308' stroke='#E8A838' stroke-width='3' fill='none' marker-end='url(#ma)'/>
+<path d='M200,464 L200,496' stroke='#b0aaa0' stroke-width='2.5' fill='none' marker-end='url(#mg)'/>
+<text x='214' y='486' font-size='13' fill='#8a847a'>status</text>
+<path d='M548,464 L548,496' stroke='#b0aaa0' stroke-width='2.5' fill='none' marker-end='url(#mg)'/>
+<text x='562' y='480' font-size='13' fill='#8a847a'>actions &#8595;</text>
+<text x='562' y='497' font-size='13' fill='#8a847a'>screens + a11y &#8593;</text>
+
+<!-- LLM API box (the one external call) -->
+<rect x='760' y='200' width='600' height='150' rx='16' fill='#242220' stroke='#0E9F7A' stroke-width='3'/>
+<text x='784' y='242' font-size='23' font-weight='bold' fill='#0E9F7A'>LLM API</text>
+<text x='784' y='276' font-size='17' fill='#e6e0d6'>Anthropic &#183; OpenAI &#183; Gemini</text>
+<text x='784' y='306' font-size='16' fill='#e6e0d6'>HTTPS over the phone&#8217;s own internet</text>
+<text x='784' y='334' font-size='16' font-weight='bold' fill='#E8A838'>&#9733; the only thing that leaves the device</text>
+
+<!-- agent -> LLM (prominent amber) -->
+<path d='M698,388 C 736,388 734,296 758,283' stroke='#E8A838' stroke-width='3.5' fill='none' marker-end='url(#ma)'/>
+<text x='706' y='372' font-size='14' font-weight='bold' fill='#E8A838'>only external call</text>
+
+<!-- MacBook box (secondary, launch + keep-alive only) -->
+<rect x='760' y='392' width='600' height='224' rx='20' fill='#2e2b28' stroke='#4a463f' stroke-width='2'/>
+<text x='784' y='430' font-size='20' font-weight='bold' fill='#c9c3b8'>MacBook — launch + keep-alive only</text>
+<text x='784' y='454' font-size='15' fill='#8a847a'>not in the loop after startup</text>
+<rect x='784' y='474' width='552' height='122' rx='12' fill='#6D5BD8'/>
+<text x='802' y='508' font-size='18' font-weight='bold' fill='#ffffff'>maestro-ios-device &#183; JVM (port 6001)</text>
+<text x='802' y='536' font-size='15' fill='#e6e0d6'>installs + launches the XCTest Runner over USB</text>
+<text x='802' y='562' font-size='15' fill='#e6e0d6'>unplug after &#8220;Ready&#8221; — session held over Wi-Fi</text>
+<text x='802' y='588' font-size='15' fill='#e6e0d6'>(usbmux Wi-Fi-sync keeps testmanagerd alive)</text>
+
+<!-- Mac -> runner (dashed, launch + hold) -->
+<path d='M760,545 L 704,556' stroke='#b0aaa0' stroke-width='2.5' stroke-dasharray='7 5' fill='none' marker-end='url(#mg)'/>
+<text x='706' y='534' font-size='13' fill='#8a847a'>launch + hold</text>
+
+<!-- bottom caption -->
+<rect x='32' y='648' width='1328' height='50' rx='14' fill='#2e2b28' stroke='#4a463f' stroke-width='2'/>
+<text x='696' y='679' font-size='17' fill='#c9c3b8' text-anchor='middle'>Only the LLM API call leaves the device — the loop, screenshots, accessibility hierarchy, memory, and HITL all run on-device.</text>
+
+<!-- legend -->
+<line x1='56' y1='726' x2='90' y2='726' stroke='#E8A838' stroke-width='3' marker-end='url(#ma)'/>
+<text x='100' y='731' font-size='14' fill='#8a847a'>task trigger</text>
+<line x1='250' y1='726' x2='284' y2='726' stroke='#b0aaa0' stroke-width='3' marker-end='url(#mg)'/>
+<text x='294' y='731' font-size='14' fill='#8a847a'>on-device flow</text>
+<line x1='470' y1='726' x2='504' y2='726' stroke='#b0aaa0' stroke-width='3' stroke-dasharray='7 5' marker-end='url(#mg)'/>
+<text x='514' y='731' font-size='14' fill='#8a847a'>Mac: launch + keep-alive (USB &#8594; Wi-Fi)</text>
+<text x='900' y='731' font-size='14' font-weight='bold' fill='#E8A838'>&#9733; the only external call</text>
+</svg>
