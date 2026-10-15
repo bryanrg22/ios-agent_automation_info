@@ -9,6 +9,9 @@
 
 </div>
 
+> [!TIP]
+> **Since the hackathon: no Mac, and it lives inside the Claude app.** A small Linux server now drives the iPhone over the network, with no cable and no laptop, and it plugs into the Claude app as a connector: ask Claude to do something on your phone, and it happens on the phone. That version is open source at **[phone-control](https://github.com/bryanrg22/phone-control)**, which explains the tunnel, how every piece works and why each one is needed.
+
 ---
 
 ## Where's the code?
